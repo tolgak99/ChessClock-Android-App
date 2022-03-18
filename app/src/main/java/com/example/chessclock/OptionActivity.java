@@ -2,9 +2,12 @@ package com.example.chessclock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +17,9 @@ public class OptionActivity extends AppCompatActivity {
     private int minute;
     private int second;
 
+    Intent myIntent;
+    RadioGroup radioGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +28,25 @@ public class OptionActivity extends AppCompatActivity {
         Intent optionIntent = getIntent();
 
         hideDeafultAppBar();
+        myIntent = new Intent(OptionActivity.this, ClockActivity.class);
+
+        radioGroup = findViewById(R.id.GameTimeRadioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i)
+                {
+                    case R.id.fullTimeButton:
+                        myIntent.putExtra("gameType","full");
+                        break;
+                    case R.id.repeatedTimeButton:
+                        myIntent.putExtra("gameType","repeat");
+                        break;
+                }
+            }
+        });
+
+        radioGroup.clearCheck();
 
         Button butOptionsSave = (Button) findViewById(R.id.optionsSaveButton);
         butOptionsSave.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +61,6 @@ public class OptionActivity extends AppCompatActivity {
                 EditText secondInput   = findViewById(R.id.editSecondTimeText);
                 second = Integer.parseInt(secondInput.getText().toString());
 
-                Intent myIntent = new Intent(OptionActivity.this, ClockActivity.class);
                 myIntent.putExtra("hour", hour);
                 myIntent.putExtra("minute",minute);
                 myIntent.putExtra("second",second);
@@ -45,35 +69,10 @@ public class OptionActivity extends AppCompatActivity {
         });
     }
 
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
-    public int getSecond() {
-        return second;
-    }
-
-    public void setSecond(int second) {
-        this.second = second;
-    }
-
     void hideDeafultAppBar()
     {
         getSupportActionBar().hide();
     }
-
 
 
 }

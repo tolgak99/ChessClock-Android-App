@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class ClockActivity extends AppCompatActivity {
 
     private int playerTurn = 1;
+    private int gameType = 0;    // 0 -> full / 1 -> repeated
 
     private Button changePlayerButton;
     private Button pauseButton;
@@ -40,11 +41,25 @@ public class ClockActivity extends AppCompatActivity {
         setContentView(R.layout.activity_clock);
 
         optionIntent = getIntent();
+        setGameType(optionIntent.getStringExtra("gameType"));
 
         hideDeafultAppBar();
         CreatePlayers();
         SetButtonListeners();
         WriteTimeToTexts();
+    }
+
+    void setGameType(String type)
+    {
+        if (type == null) {
+            gameType = 0;
+        }
+        else if (type.equals("full")) {
+            gameType = 0;
+        }
+        else if (type.equals("repeat")) {
+            gameType = 1;
+        }
     }
 
     void SwapPlayer()
@@ -67,6 +82,8 @@ public class ClockActivity extends AppCompatActivity {
             findViewById(R.id.Player1ResetButton).setClickable(false);
 
             StopTimer();
+            if (gameType == 1)
+                ResetTime();
             StartTimer();
         }
         else if (playerTurn == 2)
@@ -88,6 +105,8 @@ public class ClockActivity extends AppCompatActivity {
 
 
             StopTimer();
+            if (gameType == 1)
+                ResetTime();
             StartTimer();
         }
     }
@@ -193,6 +212,7 @@ public class ClockActivity extends AppCompatActivity {
     void StartTimer()
     {
         if (playerTurn == 1) {
+
             timeInMilisec = TimeUnit.HOURS.toMillis(player1.getMainHour()) + TimeUnit.MINUTES.toMillis(player1.getMainMinute()) + TimeUnit.SECONDS.toMillis(player1.getMainSecond());
 
             timer = new CountDownTimer(timeInMilisec, 1000) {

@@ -9,6 +9,8 @@ public class Player {
     private int mainMinuteTemp = 0;
     private int mainSecondTemp = 0;
 
+    private String nickname;
+
     void Player()
     {
         this.mainHour = 0;
@@ -18,9 +20,11 @@ public class Player {
         mainHourTemp = mainHour;
         mainMinuteTemp = mainMinute;
         mainSecondTemp = mainSecond;
+
+        nickname = "Player 1";
     }
 
-    void PLayer(int hour, int minute, int second)
+    void PLayer(int hour, int minute, int second, String name)
     {
         this.mainHour = hour;
         this.mainMinute = minute;
@@ -29,6 +33,8 @@ public class Player {
         mainHourTemp = mainHour;
         mainMinuteTemp = mainMinute;
         mainSecondTemp = mainSecond;
+
+        nickname = name;
     }
 
     public int getMainHour() {
@@ -77,5 +83,13 @@ public class Player {
 
     public void setMainSecondTemp(int mainSecondTemp) {
         this.mainSecondTemp = mainSecondTemp;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

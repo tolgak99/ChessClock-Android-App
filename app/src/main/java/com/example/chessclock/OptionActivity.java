@@ -17,7 +17,11 @@ public class OptionActivity extends AppCompatActivity {
     private int minute;
     private int second;
 
+    private String player1Name;
+    private String player2Name;
+
     Intent myIntent;
+
     RadioGroup radioGroup;
 
     @Override
@@ -58,8 +62,20 @@ public class OptionActivity extends AppCompatActivity {
                 EditText minuteInput   = findViewById(R.id.editMinuteTimeText);
                 minute = Integer.parseInt(minuteInput.getText().toString());
 
-                EditText secondInput   = findViewById(R.id.editSecondTimeText);
+                EditText secondInput  = findViewById(R.id.editSecondTimeText);
                 second = Integer.parseInt(secondInput.getText().toString());
+
+                EditText player1text = findViewById(R.id.player1NameText);
+                EditText player2text = findViewById(R.id.player2NameText);
+
+                player1Name = player1text.getText().toString();
+                player2Name = player2text.getText().toString();
+
+                Log.e("optionPlayer1Name",player1Name);
+                Log.e("optionPlayer2Name",player2Name);
+
+                myIntent.putExtra("player1name",player1Name);
+                myIntent.putExtra("player2name",player2Name);
 
                 myIntent.putExtra("hour", hour);
                 myIntent.putExtra("minute",minute);

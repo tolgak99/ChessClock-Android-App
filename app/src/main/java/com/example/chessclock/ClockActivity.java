@@ -1,37 +1,54 @@
 package com.example.chessclock;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.concurrent.TimeUnit;
 
 public class ClockActivity extends AppCompatActivity {
 
+    Player player1;
+    Player player2;
     private int playerTurn = 1;
     private int gameType = 0;    // 0 -> full / 1 -> repeated
+    private boolean isMenuOpen = false;
 
     private Button changePlayerButton;
     private Button pauseButton;
     private Button resetButton;
+    private Button halfMenuExitButton;
+    private Button halfMenuOptionButton;
+
+    ImageView arrow1;
+    ImageView arrow2;
+
+    LinearLayout layout1;
+    LinearLayout layout2;
+    LinearLayout halfMenu;
+
+    ConstraintLayout clockZone1;
+    ConstraintLayout clockZone2;
 
     private TextView timeText;
-
     private boolean timeRun = false;
     private CountDownTimer timer;
     private long timeInMilisec;
-
-    Player player1;
-    Player player2;
 
     Intent optionIntent;
 
@@ -111,8 +128,90 @@ public class ClockActivity extends AppCompatActivity {
         }
     }
 
+
+    void OpenCloseGameMenu(int whichPlayer)
+    {
+        if (!isMenuOpen) {
+
+            if (whichPlayer == 1) {
+                if (halfMenu.getRotation() == 180)
+                {
+                    halfMenu.setRotation(0);
+                }
+                layout1.setVisibility(View.GONE);
+                layout2.setVisibility(View.GONE);
+
+                halfMenu.setVisibility(View.VISIBLE);
+                isMenuOpen = true;
+            }
+            else
+            {
+                if (halfMenu.getRotation() == 0)
+                {
+                    halfMenu.setRotation(180);
+                }
+                layout1.setVisibility(View.GONE);
+                layout2.setVisibility(View.GONE);
+
+                halfMenu.setVisibility(View.VISIBLE);
+                isMenuOpen = true;
+            }
+        }
+        else
+        {
+            layout1.setVisibility(View.VISIBLE);
+            layout2.setVisibility(View.VISIBLE);
+
+            halfMenu.setVisibility(View.GONE);
+            isMenuOpen = false;
+        }
+    }
+
     void SetButtonListeners()
     {
+        arrow1 = (ImageView) findViewById(R.id.OpenMenuButton1);
+        arrow2 = (ImageView) findViewById(R.id.OpenMenuButton2);
+
+        layout1 = (LinearLayout) findViewById(R.id.Player1Layout);
+        layout2 = (LinearLayout) findViewById(R.id.Player2Layout);
+        halfMenu = (LinearLayout) findViewById(R.id.halfMenuLayout);
+
+        clockZone1 = (ConstraintLayout) findViewById(R.id.ClockZonePlayer1);
+        clockZone2 = (ConstraintLayout) findViewById(R.id.ClockZonePlayer2);
+
+        halfMenuExitButton = (Button)  findViewById(R.id.halfMenuExitButtonn);
+        halfMenuOptionButton = (Button)  findViewById(R.id.halfMenuOptionButton);
+
+        halfMenuExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainMenuIntent = new Intent(ClockActivity.this, MainMenuActivity.class);
+                startActivity(mainMenuIntent);
+            }
+        });
+
+        halfMenuOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent optionIntent = new Intent(ClockActivity.this, OptionActivity.class);
+                startActivity(optionIntent);
+            }
+        });
+
+        arrow1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenCloseGameMenu(1);
+            }
+        });
+
+        arrow2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenCloseGameMenu(2);
+            }
+        });
+
         findViewById(R.id.Player2ChangeClockButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +255,7 @@ public class ClockActivity extends AppCompatActivity {
                 ResetTime();
             }
         });
+
     }
 
     void CreatePlayers()
@@ -169,6 +269,7 @@ public class ClockActivity extends AppCompatActivity {
         player1.setMainHourTemp(optionIntent.getIntExtra("hour",0));
         player1.setMainMinuteTemp(optionIntent.getIntExtra("minute",10));
         player1.setMainSecondTemp(optionIntent.getIntExtra("second",0));
+        player1.setNickname(optionIntent.getStringExtra("player1name"));
 
         player2.setMainHour(optionIntent.getIntExtra("hour",0));
         player2.setMainMinute(optionIntent.getIntExtra("minute",10));
@@ -176,11 +277,18 @@ public class ClockActivity extends AppCompatActivity {
         player2.setMainHourTemp(optionIntent.getIntExtra("hour",0));
         player2.setMainMinuteTemp(optionIntent.getIntExtra("minute",10));
         player2.setMainSecondTemp(optionIntent.getIntExtra("second",0));
+        player2.setNickname(optionIntent.getStringExtra("player2name"));
     }
 
 
     void WriteTimeToTexts()
     {
+        TextView player1name = ((TextView)findViewById(R.id.player1Name));
+        TextView player2name = ((TextView)findViewById(R.id.player2Name));
+
+        player1name.setText(player1.getNickname());
+        player2name.setText(player2.getNickname());
+
         TextView timeText2 = ((TextView)findViewById(R.id.Player2MaxTimer));
         String timeLeftText = player2.getMainHour() + ":" + player2.getMainMinute() + ":" + player2.getMainSecond();
         if (player2.getMainMinute() < 10) {

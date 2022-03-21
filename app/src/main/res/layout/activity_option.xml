@@ -27,6 +27,37 @@
             android:textSize="34sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/player1NameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Player 1 Name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:text="Player 1 Name" />
+
+            <EditText
+                android:id="@+id/player2NameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:text="Player 2 Name" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="75dp"
@@ -41,10 +72,12 @@
 
                 <RadioButton
                     android:id="@+id/repeatedTimeButton"
-                    android:layout_width="173dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="151dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Set Repeated Game Time" />
+                    android:minHeight="48dp"
+                    android:text="Set Repeated Game Time"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <RadioButton
                     android:id="@+id/fullTimeButton"
@@ -159,7 +192,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Save" />
 
         </LinearLayout>

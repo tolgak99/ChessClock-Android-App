@@ -64,17 +64,28 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ClockZonePlayer1"
             android:layout_width="match_parent"
             android:layout_height="315dp"
             android:background="#000000">
+
+            <ImageView
+                android:id="@+id/OpenMenuButton2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="3dp"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@android:drawable/arrow_up_float"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/Player2MaxTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="112dp"
                 android:layout_marginTop="124dp"
                 android:rotationX="180"
                 android:rotationY="180"
@@ -83,12 +94,82 @@
                 android:textSize="50sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player2Name"
+                android:layout_width="175dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="113dp"
+                android:layout_marginTop="66dp"
+                android:hint="Player 2"
+                android:rotationX="180"
+                android:rotationY="180"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/halfMenuLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#5C5C5C"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/halfMenuOptionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Option" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/halfMenuExitButtonn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Exit" />
+        </LinearLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ClockZonePlayer2"
             android:layout_width="match_parent"
             android:layout_height="315dp"
             android:background="#FFFFFF">
+
+            <ImageView
+                android:id="@+id/OpenMenuButton1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="4dp"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/arrow_down_float"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:tint="#000000" />
+
+            <TextView
+                android:id="@+id/player1Name"
+                android:layout_width="172dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="121dp"
+                android:layout_marginBottom="71dp"
+                android:hint="Player 1"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/Player1MaxTimer"
@@ -102,8 +183,10 @@
                 android:textSize="50sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.383"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.125" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

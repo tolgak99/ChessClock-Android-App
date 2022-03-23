@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClockActivity">
+    tools:context=".ClockActivity"
+    >
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -78,8 +79,9 @@
                 android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@android:drawable/arrow_up_float"
-                tools:ignore="SpeakableTextPresentCheck" />
+                app:srcCompat="@drawable/ic_arrow"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:tint="#FFFFFF" />
 
             <TextView
                 android:id="@+id/Player2MaxTimer"
@@ -144,7 +146,7 @@
             android:id="@+id/ClockZonePlayer2"
             android:layout_width="match_parent"
             android:layout_height="315dp"
-            android:background="#FFFFFF">
+            android:background="#FFFCFC">
 
             <ImageView
                 android:id="@+id/OpenMenuButton1"
@@ -153,9 +155,10 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="4dp"
                 android:clickable="true"
+                android:rotation="180"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/arrow_down_float"
+                app:srcCompat="@drawable/ic_arrow"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:tint="#000000" />
 
@@ -167,6 +170,8 @@
                 android:layout_marginBottom="71dp"
                 android:hint="Player 1"
                 android:textAlignment="center"
+                android:textColor="#020202"
+                android:textColorHint="#020202"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -180,6 +185,7 @@
                 android:layout_marginEnd="190dp"
                 android:layout_marginBottom="166dp"
                 android:text="Player 1"
+                android:textColor="#000000"
                 android:textSize="50sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +199,8 @@
         <LinearLayout
             android:id="@+id/Player2Layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
             android:background="#474747"
             android:orientation="horizontal">
 
@@ -232,4 +239,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

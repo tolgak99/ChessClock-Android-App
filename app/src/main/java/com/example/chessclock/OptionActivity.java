@@ -57,22 +57,16 @@ public class OptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText hourInput   = findViewById(R.id.editHourTimeText);
-                hour = Integer.parseInt(hourInput.getText().toString());
-
                 EditText minuteInput   = findViewById(R.id.editMinuteTimeText);
-                minute = Integer.parseInt(minuteInput.getText().toString());
-
                 EditText secondInput  = findViewById(R.id.editSecondTimeText);
-                second = Integer.parseInt(secondInput.getText().toString());
+
+                CheckNullExceptions(hourInput.getText().toString(), minuteInput.getText().toString(), secondInput.getText().toString());
 
                 EditText player1text = findViewById(R.id.player1NameText);
                 EditText player2text = findViewById(R.id.player2NameText);
 
                 player1Name = player1text.getText().toString();
                 player2Name = player2text.getText().toString();
-
-                Log.e("optionPlayer1Name",player1Name);
-                Log.e("optionPlayer2Name",player2Name);
 
                 myIntent.putExtra("player1name",player1Name);
                 myIntent.putExtra("player2name",player2Name);
@@ -90,5 +84,31 @@ public class OptionActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    void CheckNullExceptions(String h, String m, String s)
+    {
+        if (h == null || h == "") {
+            hour = 0;
+        }
+        else
+        {
+            hour = Integer.parseInt(h);
+        }
+
+        if (m == null || m == "") {
+            minute = 10;
+        }
+        else
+        {
+            minute = Integer.parseInt(m);
+        }
+
+        if (s == null ||  s == ""){
+            second = 0;
+        }
+        else
+        {
+            second = Integer.parseInt(s);
+        }
+    }
 
 }

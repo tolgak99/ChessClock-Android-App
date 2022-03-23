@@ -1,11 +1,13 @@
 package com.example.chessclock;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -395,30 +397,14 @@ public class ClockActivity extends AppCompatActivity {
             player1.setMainHour((int) (millisUntilFinished / 3600000));
             player1.setMainMinute((int) millisUntilFinished % 3600000 / 60000);
             player1.setMainSecond((int) millisUntilFinished % 60000 / 1000);
-
-            if (player1.getMainMinute() < 10) {
-                if (player1.getMainSecond() < 10)
-                    timeLeftText = player1.getMainHour() + ":0" + player1.getMainMinute() + ":0" + player1.getMainSecond();
-                else
-                    timeLeftText = player1.getMainHour() + ":0" + player1.getMainMinute() + ":" + player1.getMainSecond();
-            } else
-                timeLeftText = player1.getMainHour() + ":" + player1.getMainMinute() + ":" + player1.getMainSecond();
+            WriteTimeToTexts();
         }
         else if (playerTurn == 2)
         {
             player2.setMainHour((int) (millisUntilFinished / 3600000));
             player2.setMainMinute((int) millisUntilFinished % 3600000 / 60000);
             player2.setMainSecond((int) millisUntilFinished % 60000 / 1000);
-
-            if (player2.getMainMinute() < 10) {
-                if (player2.getMainSecond() < 10)
-                    timeLeftText = player2.getMainHour() + ":0" + player2.getMainMinute() + ":0" + player2.getMainSecond();
-                else
-                    timeLeftText = player2.getMainHour() + ":0" + player2.getMainMinute() + ":" + player2.getMainSecond();
-            } else
-                timeLeftText = player2.getMainHour() + ":" + player2.getMainMinute() + ":" + player2.getMainSecond();
+            WriteTimeToTexts();
         }
-
-        timeText.setText(timeLeftText);
     }
 }
